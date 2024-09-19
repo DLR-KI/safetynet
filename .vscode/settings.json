@@ -1,0 +1,22 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "*/1.0.0/*/*_manifest.json"
+      ],
+      "url": "./1.0.0/manifest.schema.json"
+    },
+    {
+      "fileMatch": [
+        "*/1.0.0/*/*_safetynet.json"
+      ],
+      "url": "./1.0.0/safetynet.schema.json"
+    },
+    {
+      "fileMatch": [
+        "*/1.0.0/*/*_nnet.json"
+      ],
+      "url": "./1.0.0/nnet.schema.json"
+    }
+  ]
+}

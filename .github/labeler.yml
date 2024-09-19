@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2024 German Aerospace Center (DLR) <https://dlr.de>
+#
+# SPDX-License-Identifier: MIT
+General:
+- changed-files:
+  - any-glob-to-any-file:
+    - '*'
+
+GitHub:
+- changed-files:
+  - any-glob-to-any-file:
+    - .github/**
+
+Workflows:
+- changed-files:
+  - any-glob-to-any-file:
+    - .github/workflows/**
+
+Dependabot:
+- changed-files:
+  - any-glob-to-any-file:
+    - .github/dependabot.yml
+
+Labels:
+- changed-files:
+  - any-glob-to-any-file:
+    - .github/labeler.yml
+    - .github/workflows/labeler.yml
+
+v1.0.0:
+- changed-files:
+  - any-glob-to-any-file:
+    - 1.0.0/*
+
+pre-commit:
+- changed-files:
+  - any-glob-to-any-file:
+    - .pre-commit-config.yaml

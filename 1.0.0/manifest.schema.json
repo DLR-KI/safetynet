@@ -1,0 +1,454 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gitlab.dlr.de/resilienz-ki/safetynet/schema/manifest.schema.json",
+  "title": "SafetyNet Manifest",
+  "description": "Definition of the SafetyNet manifest.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the manifest.",
+      "const": "1.0.0"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the function of the safety network."
+    },
+    "function": {
+      "type": "string",
+      "description": "Name of the function of the safety network."
+    },
+    "datatype": {
+      "type": "string",
+      "description": "Datatype used for inference",
+      "oneOf": [
+        {
+          "enum": [
+            "int8",
+            "i8"
+          ],
+          "title": "8-bit (signed) integer"
+        },
+        {
+          "enum": [
+            "int16",
+            "i16"
+          ],
+          "title": "16-bit (signed) integer"
+        },
+        {
+          "enum": [
+            "int32",
+            "i32"
+          ],
+          "title": "32-bit (signed) integer"
+        },
+        {
+          "enum": [
+            "int64",
+            "i64"
+          ],
+          "title": "64-bit (signed) integer"
+        },
+        {
+          "enum": [
+            "uint8",
+            "u8"
+          ],
+          "title": "8-bit unsigned integer"
+        },
+        {
+          "enum": [
+            "uint16",
+            "u16"
+          ],
+          "title": "16-bit unsigned integer"
+        },
+        {
+          "enum": [
+            "uint32",
+            "u32"
+          ],
+          "title": "32-bit unsigned integer"
+        },
+        {
+          "enum": [
+            "uint64",
+            "u64"
+          ],
+          "title": "64-bit unsigned integer"
+        },
+        {
+          "enum": [
+            "float16",
+            "f16"
+          ],
+          "title": "16-bit floating point number"
+        },
+        {
+          "enum": [
+            "float32",
+            "f32"
+          ],
+          "title": "32-bit floating point number"
+        },
+        {
+          "enum": [
+            "float64",
+            "f64"
+          ],
+          "title": "64-bit floating point number"
+        }
+      ]
+    },
+    "inputs": {
+      "type": "array",
+      "description": "Inputs of the safety network.",
+      "items": {
+        "$ref": "#/templates/input"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "additionalProperties": false
+    },
+    "numberOutputs": {
+      "type": "integer",
+      "description": "Number of outputs",
+      "minimum": 1
+    },
+    "networks": {
+      "type": "array",
+      "description": "Networks to be used",
+      "items": {
+        "$ref": "#/templates/network"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "additionalProperties": false
+    },
+    "luts": {
+      "type": "array",
+      "description": "Lookup tables to be used.",
+      "items": {
+        "$ref": "#/templates/lut"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "description",
+    "function",
+    "datatype",
+    "inputs",
+    "numberOutputs",
+    "networks",
+    "luts"
+  ],
+  "additionalProperties": false,
+  "templates": {
+    "input": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "description": "Index of the input",
+          "minimum": 0
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the input"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the input"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the input"
+        },
+        "minimum": {
+          "type": "number",
+          "description": "Minimum value (set either minimum or exclusiveMinimum)."
+        },
+        "exclusiveMinimum": {
+          "type": "number",
+          "description": "Exclusive minimum value (set either minimum or exclusiveMinimum)."
+        },
+        "maximum": {
+          "type": "number",
+          "description": "Maximum value (set either maximum or exclusiveMaximum)."
+        },
+        "exclusiveMaximum": {
+          "type": "number",
+          "description": "Exclusive maximum value (set either maximum or exclusiveMaximum)."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of the input."
+        },
+        "ranges": {
+          "type": "array",
+          "description": "Ranges of the input.",
+          "items": {
+            "$ref": "#/templates/stridedRange"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "additionalProperties": false
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "minimum",
+            "maximum"
+          ]
+        },
+        {
+          "required": [
+            "exclusiveMinimum",
+            "maximum"
+          ]
+        },
+        {
+          "required": [
+            "minimum",
+            "exclusiveMaximum"
+          ]
+        },
+        {
+          "required": [
+            "exclusiveMinimum",
+            "exclusiveMaximum"
+          ]
+        }
+      ],
+      "required": [
+        "index",
+        "id",
+        "name",
+        "description",
+        "unit",
+        "ranges"
+      ],
+      "additionalProperties": false
+    },
+    "network": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "Local filename or full path to the network."
+        },
+        "networkFormat": {
+          "type": "string",
+          "oneOf": [
+            {
+              "enum": [
+                "nnet"
+              ],
+              "title": "Classic NNet format."
+            },
+            {
+              "enum": [
+                "jnet"
+              ],
+              "title": "JSON formatted NNet."
+            },
+            {
+              "enum": [
+                "onnx"
+              ],
+              "title": "Open Neural Network Exchange format."
+            },
+            {
+              "enum": [
+                "tflite"
+              ],
+              "title": "TensorFlow Lite format."
+            },
+            {
+              "enum": [
+                "torch"
+              ],
+              "title": "PyTorch format."
+            }
+          ]
+        },
+        "if": {
+          "type": "object",
+          "description": "Valid input ranges for the neural network.",
+          "patternProperties": {
+            "^.*$": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/templates/range"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "file",
+        "networkFormat",
+        "if"
+      ],
+      "additionalProperties": false
+    },
+    "lut": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "Local filename or full path to the SafetyNet."
+        },
+        "lutFormat": {
+          "type": "string",
+          "oneOf": [
+            {
+              "enum": [
+                "snet"
+              ],
+              "title": "SafetyNet format."
+            }
+          ]
+        },
+        "if": {
+          "type": "object",
+          "description": "Valid input ranges for the SafetyNet.",
+          "patternProperties": {
+            "^.*$": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "$ref": "#/templates/range"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "file",
+        "lutFormat",
+        "if"
+      ],
+      "additionalProperties": false
+    },
+    "range": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "type": "number",
+          "description": "Minimum value (set either minimum or exclusiveMinimum)."
+        },
+        "exclusiveMinimum": {
+          "type": "number",
+          "description": "Exclusive minimum value (set either minimum or exclusiveMinimum)."
+        },
+        "maximum": {
+          "type": "number",
+          "description": "Maximum value (set either maximum or exclusiveMaximum)."
+        },
+        "exclusiveMaximum": {
+          "type": "number",
+          "description": "Exclusive maximum value (set either maximum or exclusiveMaximum)."
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "minimum",
+            "maximum"
+          ]
+        },
+        {
+          "required": [
+            "exclusiveMinimum",
+            "maximum"
+          ]
+        },
+        {
+          "required": [
+            "minimum",
+            "exclusiveMaximum"
+          ]
+        },
+        {
+          "required": [
+            "exclusiveMinimum",
+            "exclusiveMaximum"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "stridedRange": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "type": "number",
+          "description": "Minimum value (set either minimum or exclusiveMinimum)."
+        },
+        "exclusiveMinimum": {
+          "type": "number",
+          "description": "Exclusive minimum value (set either minimum or exclusiveMinimum)."
+        },
+        "maximum": {
+          "type": "number",
+          "description": "Maximum value (set either maximum or exclusiveMaximum)."
+        },
+        "exclusiveMaximum": {
+          "type": "number",
+          "description": "Exclusive maximum value (set either maximum or exclusiveMaximum)."
+        },
+        "stride": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Stride of the range. E.g. min = 3, max = 9, stride = 3 -> [3, 6, 9]; min = 3, max = 10, stride = 3 -> [3, 6, 9]"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "minimum",
+            "maximum"
+          ]
+        },
+        {
+          "required": [
+            "exclusiveMinimum",
+            "maximum"
+          ]
+        },
+        {
+          "required": [
+            "minimum",
+            "exclusiveMaximum"
+          ]
+        },
+        {
+          "required": [
+            "exclusiveMinimum",
+            "exclusiveMaximum"
+          ]
+        }
+      ],
+      "required": [
+        "stride"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

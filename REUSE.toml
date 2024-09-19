@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2024 German Aerospace Center (DLR) <https://dlr.de>
+#
+# SPDX-License-Identifier: MIT
+
+version = 1
+
+[[annotations]]
+SPDX-FileCopyrightText = "German Aerospace Center (DLR) <https://dlr.de>"
+SPDX-License-Identifier = "MIT"
+path = "1.0.0/*.json"
+
+[[annotations]]
+SPDX-FileCopyrightText = "German Aerospace Center (DLR) <https://dlr.de>"
+SPDX-License-Identifier = "MIT"
+path = ".vscode/*.json"

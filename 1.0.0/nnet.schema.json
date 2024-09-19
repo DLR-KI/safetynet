@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gitlab.dlr.de/resilienz-ki/nnet/schema/nnet.schema.json",
+  "title": "NNet Schema",
+  "description": "Definition of the NNet schema from <https://github.com/sisl/NNet>.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the manifest.",
+      "const": "1.0.0"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the function of the nnet. This is not part of the nnet file itself, but part of the manifest."
+    },
+    "datatype": {
+      "type": "string",
+      "description": "Datatype used for inference",
+      "oneOf": [
+        {
+          "enum": [
+            "int8",
+            "i8"
+          ],
+          "title": "8-bit (signed) integer"
+        },
+        {
+          "enum": [
+            "int16",
+            "i16"
+          ],
+          "title": "16-bit (signed) integer"
+        },
+        {
+          "enum": [
+            "int32",
+            "i32"
+          ],
+          "title": "32-bit (signed) integer"
+        },
+        {
+          "enum": [
+            "int64",
+            "i64"
+          ],
+          "title": "64-bit (signed) integer"
+        },
+        {
+          "enum": [
+            "uint8",
+            "u8"
+          ],
+          "title": "8-bit unsigned integer"
+        },
+        {
+          "enum": [
+            "uint16",
+            "u16"
+          ],
+          "title": "16-bit unsigned integer"
+        },
+        {
+          "enum": [
+            "uint32",
+            "u32"
+          ],
+          "title": "32-bit unsigned integer"
+        },
+        {
+          "enum": [
+            "uint64",
+            "u64"
+          ],
+          "title": "64-bit unsigned integer"
+        },
+        {
+          "enum": [
+            "float16",
+            "f16"
+          ],
+          "title": "16-bit floating point number"
+        },
+        {
+          "enum": [
+            "float32",
+            "f32"
+          ],
+          "title": "32-bit floating point number"
+        },
+        {
+          "enum": [
+            "float64",
+            "f64"
+          ],
+          "title": "64-bit floating point number"
+        }
+      ]
+    },
+    "header": {
+      "type": "array",
+      "description": "Header text of the nnet file. This can be any text.",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": false
+    },
+    "numberLayers": {
+      "type": "integer",
+      "description": "Number of layers",
+      "minimum": 1
+    },
+    "numberInputs": {
+      "type": "integer",
+      "description": "Number of inputs",
+      "minimum": 1
+    },
+    "numberOutputs": {
+      "type": "integer",
+      "description": "Number of outputs",
+      "minimum": 1
+    },
+    "maximumLayerSize": {
+      "type": "integer",
+      "description": "Maximum size of a layer",
+      "minimum": 1
+    },
+    "layerSizes": {
+      "type": "array",
+      "description": "Sizes of the layers",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    },
+    "symmetric": {
+      "type": "boolean",
+      "description": "[DEPRECATED] Whether the network is symmetric (the field is only kept for backwards compatibility).",
+      "default": false
+    },
+    "inputMinimums": {
+      "type": "array",
+      "description": "Minimum values of the inputs",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    },
+    "inputMaximums": {
+      "type": "array",
+      "description": "Maximum values of the inputs",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    },
+    "inputOutputMeans": {
+      "type": "array",
+      "description": "Means of the inputs",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    },
+    "inputOutputRanges": {
+      "type": "array",
+      "description": "Ranges of the inputs",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    },
+    "layers": {
+      "type": "array",
+      "description": "Layers of the network",
+      "items": {
+        "$ref": "#/templates/layer"
+      },
+      "minItems": 1,
+      "uniqueItems": false,
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "description",
+    "datatype",
+    "numberLayers",
+    "numberInputs",
+    "numberOutputs",
+    "maximumLayerSize",
+    "layerSizes",
+    "inputMinimums",
+    "inputMaximums",
+    "inputOutputMeans",
+    "inputOutputRanges",
+    "layers"
+  ],
+  "additionalProperties": false,
+  "templates": {
+    "layer": {
+      "type": "object",
+      "properties": {
+        "weights": {
+          "type": "array",
+          "description": "Weight matrix of the layer",
+          "items": {
+            "type": "array",
+            "description": "Single row vector of the weight matrix",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 1,
+            "uniqueItems": false
+          },
+          "minItems": 1,
+          "uniqueItems": false
+        },
+        "biases": {
+          "type": "array",
+          "description": "Bias vector of the layer",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1,
+          "uniqueItems": false
+        }
+      },
+      "required": [
+        "weights",
+        "biases"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
