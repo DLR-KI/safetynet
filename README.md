@@ -6,6 +6,9 @@ SPDX-License-Identifier: MIT
 
 # SafetyNet Manifest
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/DLR-KI/pycasx/main.svg)](https://results.pre-commit.ci/latest/github/DLR-KI/pycasx/main)
+[![REUSE status](https://api.reuse.software/badge/github.com/DLR-KI/safetynet)](https://api.reuse.software/info/github.com/DLR-KI/safetynet)
+
 This directory contains the JSON manifests for the different components of the SafetyNet standard.
 
 ## Citation
