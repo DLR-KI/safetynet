@@ -8,6 +8,7 @@ SPDX-License-Identifier: MIT
 
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/DLR-KI/safetynet/main.svg)](https://results.pre-commit.ci/latest/github/DLR-KI/safetynet/main)
 [![REUSE status](https://api.reuse.software/badge/github.com/DLR-KI/safetynet)](https://api.reuse.software/info/github.com/DLR-KI/safetynet)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13815581.svg)](https://doi.org/10.5281/zenodo.13815581)
 
 This directory contains the JSON schema for the different components of the SafetyNet standard.
 
