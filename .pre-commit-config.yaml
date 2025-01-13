@@ -5,7 +5,7 @@
 # <https://github.com/pre-commit/pre-commit-hooks>
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.6.0
+  rev: v5.0.0
   hooks:
   - id: check-case-conflict
   - id: check-json
@@ -16,7 +16,7 @@ repos:
   - id: end-of-file-fixer
   - id: trailing-whitespace
 - repo: https://github.com/fsfe/reuse-tool
-  rev: v4.0.3
+  rev: v5.0.2
   hooks:
   - id: reuse
     name: Check license headers (REUSE)
@@ -33,7 +33,7 @@ repos:
     args:
     - --write-changes
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.29.2
+  rev: 0.31.0
   hooks:
   - id: check-github-workflows
     name: Check GitHub Workflow configuration
@@ -42,7 +42,7 @@ repos:
   hooks:
   - id: editorconfig-checker
 - repo: https://github.com/igorshubovych/markdownlint-cli
-  rev: v0.41.0
+  rev: v0.43.0
   hooks:
   - id: markdownlint
     name: Fixing markdown linting errors
