@@ -5,7 +5,7 @@
 # <https://github.com/pre-commit/pre-commit-hooks>
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v5.0.0
+  rev: v6.0.0
   hooks:
   - id: check-case-conflict
   - id: check-json
@@ -16,7 +16,7 @@ repos:
   - id: end-of-file-fixer
   - id: trailing-whitespace
 - repo: https://github.com/fsfe/reuse-tool
-  rev: v5.0.2
+  rev: v6.2.0
   hooks:
   - id: reuse
     name: Check license headers (REUSE)
@@ -26,29 +26,29 @@ repos:
   - id: validate-cff
     name: Validate CITATION.cff file
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.4.1
+  rev: v2.4.2
   hooks:
   - id: codespell
     name: Fixing common spelling mistakes
     args:
     - --write-changes
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.31.1
+  rev: 0.37.2
   hooks:
   - id: check-github-workflows
     name: Check GitHub Workflow configuration
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-  rev: 3.2.0
+  rev: 3.6.1
   hooks:
   - id: editorconfig-checker
 - repo: https://github.com/igorshubovych/markdownlint-cli
-  rev: v0.44.0
+  rev: v0.48.0
   hooks:
   - id: markdownlint
     name: Fixing markdown linting errors
     args: [--disable, MD013, MD033, --fix]
 - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-  rev: v2.14.0
+  rev: v2.16.0
   hooks:
   - id: pretty-format-yaml
     args: [--autofix, --indent, '2', CITATION.cff]
