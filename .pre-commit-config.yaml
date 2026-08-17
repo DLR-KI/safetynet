@@ -26,23 +26,23 @@ repos:
   - id: validate-cff
     name: Validate CITATION.cff file
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.4.2
+  rev: v2.4.3
   hooks:
   - id: codespell
     name: Fixing common spelling mistakes
     args:
     - --write-changes
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.37.3
+  rev: 0.38.0
   hooks:
   - id: check-github-workflows
     name: Check GitHub Workflow configuration
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-  rev: 3.6.1
+  rev: 3.11.1
   hooks:
   - id: editorconfig-checker
 - repo: https://github.com/igorshubovych/markdownlint-cli
-  rev: v0.49.0
+  rev: v0.49.1
   hooks:
   - id: markdownlint
     name: Fixing markdown linting errors
